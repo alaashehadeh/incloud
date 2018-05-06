@@ -27,13 +27,4 @@ class usersController extends Controller
         $user = $this->userService->getUser();
         return response()->json($user);
     }
-
-    public function getToken()
-    {
-        $user = $this->userService->getUser();
-        $payload = JWTFactory::fromUser($user);
-        $token = JWTFactory::encode($payload);
-        dd($token);
-        return $token;
-    }
 }

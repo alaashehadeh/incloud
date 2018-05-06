@@ -19,6 +19,5 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
         //get the user api
         $router->get('info','usersController@getUser');
-        $router->get('token','usersController@getToken');
     });
 });
