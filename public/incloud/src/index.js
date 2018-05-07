@@ -8,6 +8,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 //global variables
 global.host = 'http://localhost:3600/api/v1/';
+global.date = null;
+global.fromTime = null;
+global.toTime = null;
 
 if(localStorage.user !== undefined) {
     global.user = JSON.parse(localStorage.user);

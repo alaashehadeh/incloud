@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
+
 class Header extends Component {
     render() {
         return (
@@ -8,7 +10,7 @@ class Header extends Component {
                         <img src={require('../images/logo.png')} />
                     </div>
                     <ul className="nav navbar-nav">
-                        <li><a href="#">Book time</a></li>
+                        <li><Link to="/book">Book time</Link></li>
                         <li><a href="#">My calendar</a></li>
                     </ul>
                 </div>

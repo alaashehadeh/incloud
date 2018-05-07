@@ -15,9 +15,12 @@ class TimeTable extends Migration
     {
         Schema::create('time_booking', function($table) {
             $table->bigIncrements('id')->unique();
+            $table->integer('user_primary_id');
+            $table->date('date');
             $table->longText('desc');
             $table->json('track')->nullable(true);
-            $table->double('total', 2, 2);
+            $table->integer('total');
+            $table->boolean('closed')->default(true);
             $table->timestamps();
         });
     }

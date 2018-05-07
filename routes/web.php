@@ -20,4 +20,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         //get the user api
         $router->get('info','usersController@getUser');
     });
+
+    //book API
+    $router->group(['prefix' => 'book'], function () use ($router) {
+
+        //store book time
+        $router->post('create','bookController@setBook');
+    });
 });

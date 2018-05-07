@@ -9,8 +9,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\userService;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Facades\JWTFactory;
 
 
 class usersController extends Controller

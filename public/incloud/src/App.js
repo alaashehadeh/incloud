@@ -1,44 +1,20 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import axios from 'axios'
-import Header from "./Components/header";
+import Main from "./Components/main";
+import Book from "./Components/book";
 
 class App extends Component {
-    getUser() {
-        var $this = this;
-        axios.get(global.host + 'user/info').then(function (xhr) {
-            localStorage.setItem('user', JSON.stringify(xhr.data));
-            $this.setState({
-                loader: true
-            });
-        })
+    render() {
+        return (
+            <Router>
+                <span>
+                    <Route exact path="/" component={Main}/>
+                    <Route exact path="/book" component={Book}/>
+                </span>
+            </Router>
+        )
     }
-  render() {
-      if(!this.state.loader) {
-          var content = <span>
-        <div className="text-center"><img src={require('./images/logo.png')}/> </div>
-            <div className="text-center">
-              <img src={require('./images/loader.gif')}/>
-              <h3>Get the user information</h3>
-            </div>
-        </span>
-      }
-      else {
-          var content = <Header/>
-      }
-
-    return content
-    ;
-  }
-  constructor() {
-        super();
-        this.state = {
-            loader: false
-        }
-
-      //get user information
-      this.getUser = this.getUser.bind(this);
-      this.getUser();
-  }
 }
 
 export default App;
