@@ -17,6 +17,7 @@ class DTOHelper
         $output['user_first_name'] = $data->first_name;
         $output['user_last_name'] = $data->last_name;
         $output['name'] = $data->first_name . ' ' . $data->last_name;
+        $output['user_id'] = $data->id;
         return $output;
     }
     public static function prepareBookCreate($data) {
@@ -30,7 +31,7 @@ class DTOHelper
         else
             $output['date'] = date('Y-m-d');
 
-        $output['track'] = array('start'=>date('G:i',strtotime($data->from.' +3 hours')),'end'=>date('G:i',strtotime($data->to.' +3 hours')));
+        $output['track'][] = array('start'=>date('G:i:s',strtotime($data->from.' +3 hours')),'end'=>date('G:i:s',strtotime($data->to.' +3 hours')));
 
         if($data->from & $data->to)
             $output['total'] = timeHelper::totalBookTime($data->from,$data->to);

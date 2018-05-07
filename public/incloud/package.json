@@ -10,12 +10,12 @@
     "moment": "^2.22.1",
     "rc-time-picker": "^3.3.1",
     "react": "^16.3.2",
-    "react-day-picker": "^7.1.7",
+    "react-day-picker": "^7.1.8",
     "react-dom": "^16.3.2",
-    "react-live-clock": "^2.0.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-stopwatch": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

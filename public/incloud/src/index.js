@@ -11,6 +11,7 @@ global.host = 'http://localhost:3600/api/v1/';
 global.date = null;
 global.fromTime = null;
 global.toTime = null;
+global.user = null;
 
 if(localStorage.user !== undefined) {
     global.user = JSON.parse(localStorage.user);

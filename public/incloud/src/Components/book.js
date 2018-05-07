@@ -5,8 +5,14 @@ import Date from "./date";
 import TimeFromTo from "./timeFromTo";
 import axios from 'axios'
 import $ from 'jquery'
+import Stopwatch from 'react-stopwatch'
+import moment from 'moment'
 
 class Book extends Component {
+    getTime() {
+        var data = moment().format('HH:mm:ss');;
+        return data;
+    }
     showBook() {
         global.date = null
         global.fromTime = null
@@ -66,6 +72,7 @@ class Book extends Component {
                 bookWithInterval: true
             })
             var content = <span>
+                <div id="stopwatch">
                 <div className="alert alert-info">
                     <h4>The book date and start time will be auto defined to now datetime once you click on start</h4>
                 </div>
@@ -79,6 +86,7 @@ class Book extends Component {
                     <div className="col-md-10">
                         <textarea id="description" className="form-control" onChange={this.handleDescriptionChange}></textarea>
                     </div>
+                </div>
                 </div>
 
                 <div className="form-group row">
@@ -127,24 +135,42 @@ class Book extends Component {
                     ,document.getElementById('interval_messages'))
         }
         else {
-            this.setState({
-                start: new Date()
-            })
+            global.fromTime = this.getTime()
+            const styles = {
+                containerOutter: {
+                    width: '100%',
+                    height: 'auto',
+                    position: 'static',
+                    background: 'none',
+                    border: 'none'
+                },
+                containerInner: {
+                    color: '#000'
+                }
+            }
             ReactDOM.render(
                 <div className="row">
                     <div className="col-md-6">
-                        <button className="btn btn-info">Pause</button>
+                        <button className="btn btn-info" onClick={this.pauseWatch}>Pause</button>
                     </div>
                     <div className="col-md-6">
                         <button className="btn btn-danger">End Task</button>
                     </div>
                 </div>, document.getElementById('start_btn'))
+            ReactDOM.render(<div><Stopwatch
+                seconds={0}
+                minutes={0}
+                hours={0}
+                custom={styles}
+                theme='secondary'
+            /></div>,document.getElementById('stopwatch'))
         }
     }
+    pauseWatch() {
+        global.toTime = this.getTime()
+        this.saveBook();
+    }
     setEnd() {
-        this.setState({
-            end: new Date()
-        })
     }
 
     handleDescriptionChange(event) {
@@ -165,6 +191,7 @@ class Book extends Component {
         this.saveBook = this.saveBook.bind(this)
         this.showBookWithInterval = this.showBookWithInterval.bind(this)
         this.setStart = this.setStart.bind(this)
+        this.pauseWatch = this.pauseWatch.bind(this)
     }
 
     render() {

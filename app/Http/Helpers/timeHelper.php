@@ -16,10 +16,10 @@ class timeHelper
     {
         $biggerTime = new Carbon($to);
         $lessTime = new Carbon($from);
-        $diff = $biggerTime->diffInMinutes($lessTime);
+        $diff = $biggerTime->diffInSeconds($lessTime);
         return $diff;
     }
     public static function minToTime($min) {
-        return date('H:i',mktime(0,$min));
+        return date('H:i:s',mktime(0,$min));
     }
 }

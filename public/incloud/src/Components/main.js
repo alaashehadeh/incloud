@@ -6,7 +6,9 @@ class Main extends Component {
     getUser() {
         var $this = this;
         axios.get(global.host + 'user/info').then(function (xhr) {
+            console.log(xhr.data);
             localStorage.setItem('user', JSON.stringify(xhr.data));
+            global.user = JSON.parse(localStorage.user);
             $this.setState({
                 loader: true
             });
