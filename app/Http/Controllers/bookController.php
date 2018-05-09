@@ -35,8 +35,9 @@ class bookController extends Controller
         if (count($validator->all()) > 0)
             return response()->json($validator->all(), 404);
         else {
-            $this->bookingRepostitory->create($create);
-            return response()->json(array('created'=>true));
+            $data = $this->bookingRepostitory->create($create);
+            $data = DTOHelper::bookOutput($data);
+            return response()->json(array('data'=>$data));
         }
 
     }

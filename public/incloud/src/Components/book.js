@@ -10,7 +10,7 @@ import moment from 'moment'
 
 class Book extends Component {
     getTime() {
-        var data = moment().format('HH:mm:ss');;
+        var data = moment().format('HH:mm:ss');
         return data;
     }
     showBook() {
@@ -107,6 +107,7 @@ class Book extends Component {
             from: global.fromTime,
             to: global.toTime
         }
+        var $this = this;
         axios.post(global.host + 'book/create',data).catch(function (error) {
             if(error.response) {
                 ReactDOM.render(
@@ -121,11 +122,18 @@ class Book extends Component {
             }
         }).then(function (xhr) {
             if(xhr) {
+                $this.setState({
+                    book_id: xhr.data.book_id
+                })
                 ReactDOM.render(<div className="alert alert-success text-center">
                     <h4>You have added the book time correctly</h4>
                 </div> ,document.getElementById('messages'))
             }
         });
+    }
+
+    updateBook() {
+
     }
 
     setStart() {
@@ -168,7 +176,10 @@ class Book extends Component {
     }
     pauseWatch() {
         global.toTime = this.getTime()
-        this.saveBook();
+        if(this.state.book_id === null)
+            this.saveBook();
+        else
+            this.updateBook();
     }
     setEnd() {
     }
@@ -184,7 +195,8 @@ class Book extends Component {
             description: null,
             bookWithInterval: false,
             start: null,
-            end: null
+            end: null,
+            book_id: null
         }
         this.showBook = this.showBook.bind(this)
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this)

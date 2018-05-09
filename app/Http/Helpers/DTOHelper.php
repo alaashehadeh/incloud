@@ -31,12 +31,23 @@ class DTOHelper
         else
             $output['date'] = date('Y-m-d');
 
-        $output['track'][] = array('start'=>date('G:i:s',strtotime($data->from.' +3 hours')),'end'=>date('G:i:s',strtotime($data->to.' +3 hours')));
+        $output['track'][] = array('start'=>date('G:i:s',strtotime($data->from)),'end'=>date('G:i:s',strtotime($data->to)));
 
         if($data->from & $data->to)
             $output['total'] = timeHelper::totalBookTime($data->from,$data->to);
 
         $output['track'] = json_encode($output['track']);
+        return $output;
+    }
+    public static function bookOutput($data) {
+        $output = array();
+        $output['user_id'] = $data->user_primary_id;
+        $output['description'] = $data->desc;
+        $output['date'] = $data->date;
+        $output['track'] = json_decode($data->track);
+        $output['time'] = $data->total;
+        $output['open'] = $data->closed;
+        $output['book_id'] = $data->id;
         return $output;
     }
 }
