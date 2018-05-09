@@ -41,4 +41,9 @@ class bookController extends Controller
         }
 
     }
+
+    public function updateBook($book_id) {
+        $data = $this->bookingRepostitory->find($book_id);
+        dd($data);
+    }
 }
