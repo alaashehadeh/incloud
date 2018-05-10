@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Helpers\DTOHelper;
+use App\Http\Helpers\timeHelper;
 use Illuminate\Http\Request;
 use App\Http\Repositories\bookingRepostitory;
 use Validator;
@@ -42,8 +43,21 @@ class bookController extends Controller
 
     }
 
-    public function updateBook($book_id) {
+    public function updateBook($book_id,Request $request) {
         $data = $this->bookingRepostitory->find($book_id);
-        dd($data);
+        if(!$data)
+            return response()->json(array('error'=>'Task not exist'),404);
+        else {
+            $data = DTOHelper::prepareUpdate($data->track,$request->from,$request->to,$data->total);
+            $this->bookingRepostitory->update($data,$book_id);
+            return response()->json(array('success'=>true));
+        }
+    }
+    public function getAllBooks() {
+        $output = array();
+        $data = $this->bookingRepostitory->all();
+        foreach ($data as $value)
+            $output[] = DTOHelper::bookOutput($value);
+        return response()->json(DTOHelper::calendarOutput($output));
     }
 }

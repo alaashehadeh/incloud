@@ -7,7 +7,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 //global variables
-global.host = 'http://localhost:3600/api/v1/';
+global.host = 'http://localhost:8001/api/v1/';
 global.date = null;
 global.fromTime = null;
 global.toTime = null;

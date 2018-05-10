@@ -28,6 +28,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->post('create','bookController@setBook');
 
         //update book time
-        $router->post('{book_id}','bookController@updateBook');
+        $router->put('{book_id}','bookController@updateBook');
+
+        //get all books
+        $router->get('all','bookController@getAllBooks');
     });
 });

@@ -31,12 +31,12 @@ class DTOHelper
         else
             $output['date'] = date('Y-m-d');
 
-        $output['track'][] = array('start'=>date('G:i:s',strtotime($data->from)),'end'=>date('G:i:s',strtotime($data->to)));
-
         if($data->from & $data->to)
             $output['total'] = timeHelper::totalBookTime($data->from,$data->to);
 
+        $output['track'][] = array('start'=>date('Y-m-d G:i:s',strtotime($data->from)),'end'=>date('Y-m-d G:i:s',strtotime($data->to)),'total'=>$output['total']);
         $output['track'] = json_encode($output['track']);
+
         return $output;
     }
     public static function bookOutput($data) {
@@ -45,9 +45,34 @@ class DTOHelper
         $output['description'] = $data->desc;
         $output['date'] = $data->date;
         $output['track'] = json_decode($data->track);
-        $output['time'] = $data->total;
-        $output['open'] = $data->closed;
+        $output['time'] = timeHelper::secondsToTime($data->total);
         $output['book_id'] = $data->id;
+        return $output;
+    }
+    public static function prepareUpdate($track,$from,$to,$total) {
+        $output = array();
+
+        //get the time total
+        $total_work = timeHelper::totalBookTime($from,$to);
+
+        //prepare track json data
+        $track_record = array('from'=>date('Y-m-d G:i:s',strtotime($from)),'to'=>date('Y-m-d G:i:s',strtotime($to)),'total'=>$total_work);
+        $track = json_decode($track);
+        $track[] = $track_record;
+
+        $output['track'] = json_encode($track);
+        $output['total'] = $total_work + $total;
+
+        return $output;
+    }
+    public static function calendarOutput($data) {
+        $output = array();
+        foreach ($data as $key=>$value) {
+            $output[$key]['start'] = $value['date'];
+            $output[$key]['end'] = $value['date'];
+            $output[$key]['title'] = $value['description'].' - Time duration: '.$value['time'];
+            $output[$key]['allDay'] = true;
+        }
         return $output;
     }
 }

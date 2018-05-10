@@ -143,7 +143,7 @@ class Book extends Component {
             to: this.getTime(),
             book_id: this.state.book_id
         }
-        axios.post(global.host+ 'book/'+data.book_id,data)
+        axios.put(global.host+ 'book/'+data.book_id,data)
     }
 
     setStart() {
@@ -157,12 +157,9 @@ class Book extends Component {
 
             ReactDOM.render(
                 <div className="row">
-                    <div className="col-md-6" id="pause">
+                    <div className="col-md-12" id="pause">
                         <button className="btn btn-info" onClick={this.pauseWatch}><i className="fa fa-play"></i> | <i
                             className="fa fa-pause"></i></button>
-                    </div>
-                    <div className="col-md-6">
-                        <button className="btn btn-danger">End Task</button>
                     </div>
                 </div>, document.getElementById('start_btn'))
             ReactDOM.render(<div><Stopwatch
@@ -183,7 +180,7 @@ class Book extends Component {
         global.toTime = this.getTime()
         if (this.state.book_id === null) {
             this.saveBook();
-            ReactDOM.render(null, document.getElementById('stopwatch'))
+            ReactDOM.render(<div className="alert alert-info text-center lead">Your record added correctly if you want to proceed click on play button below</div> , document.getElementById('stopwatch'))
             this.setState({
                 showTimer: true
             })
@@ -201,17 +198,14 @@ class Book extends Component {
                 })
             }
             else {
-                ReactDOM.render(null,document.getElementById('stopwatch'))
+                this.updateBook();
+                ReactDOM.render(<div className="alert alert-info text-center lead">Your record added correctly if you want to proceed click on play button below</div>,document.getElementById('stopwatch'))
                 this.setState({
                     showTimer: true
                 })
             }
-            this.updateBook();
 
         }
-    }
-
-    setEnd() {
     }
 
     handleDescriptionChange(event) {

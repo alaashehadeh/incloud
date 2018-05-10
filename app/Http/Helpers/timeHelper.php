@@ -19,7 +19,7 @@ class timeHelper
         $diff = $biggerTime->diffInSeconds($lessTime);
         return $diff;
     }
-    public static function minToTime($min) {
-        return date('H:i:s',mktime(0,$min));
+    public static function secondsToTime($seconds) {
+        return date('H:i:s',mktime(0,0,$seconds));
     }
 }

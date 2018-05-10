@@ -20,7 +20,6 @@ class TimeTable extends Migration
             $table->longText('desc');
             $table->json('track')->nullable(true);
             $table->integer('total');
-            $table->boolean('closed')->default(true);
             $table->timestamps();
         });
     }

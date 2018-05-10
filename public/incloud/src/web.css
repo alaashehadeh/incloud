@@ -16,4 +16,7 @@
 .cursor {
   cursor: pointer;
 }
+.rbc-month-view {
+  height: 95vh !important;
+}
 /*# sourceMappingURL=web.css.map */

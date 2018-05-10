@@ -10,6 +10,7 @@
     "moment": "^2.22.1",
     "rc-time-picker": "^3.3.1",
     "react": "^16.3.2",
+    "react-big-calendar": "^0.19.1",
     "react-day-picker": "^7.1.8",
     "react-dom": "^16.3.2",
     "react-native": "^0.55.4",

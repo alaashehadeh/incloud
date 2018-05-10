@@ -11,7 +11,7 @@ class Header extends Component {
                     </div>
                     <ul className="nav navbar-nav">
                         <li><Link to="/book">Book time</Link></li>
-                        <li><a href="#">My calendar</a></li>
+                        <li><Link to="/calendar">My calendar</Link></li>
                     </ul>
                 </div>
             </nav>
