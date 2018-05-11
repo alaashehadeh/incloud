@@ -1,22 +1,40 @@
-# Lumen PHP Framework
+I used lumen for backend development
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Backend setup:
+1- through command promt go to cloned folder and run
+composer install
+2- create a database then open .env on the root folder, change the following variables to your server infromation
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=incloud
+DB_USERNAME=root
+DB_PASSWORD=
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+3- run the following code to install the database: php artisan migrate
 
-## Official Documentation
+4- run the following code to seed initial content: php artisan db:seed
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+5- run the following code at cloned server/public: php -S localhost:8001
 
-## Security Vulnerabilities
+thats it for the backend in case you want run different server or port please add the following step at the front end
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+6- open /public/incloud/src/index.js, change 
+global.host = 'http://localhost:8001/api/v1/'; 
+to your server and port
 
-## License
+as there is no auth I seed one row at users table and store content at localstorage for this row.
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-"# incloud" 
+for that i didnt use JWT and didnt pass Bearer tokens for the APIs
+
+the CORS open by code, I know its not secured just did that to avoid create builds and easier for your setup
+
+front end setup
+
+1- run this code at cloned folder/public/incloud
+npm install 
+to install all required packages
+
+2- run this code at cloned folder/public/incloud
+npm start 
+the browser will be opened directly to my application
